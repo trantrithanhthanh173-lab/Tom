@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fabric Mod Downloader & Script Generator</title>
+    <script>
+      // Prevent fetch setter errors in environments with read-only window.fetch
+      (function() {
+        if (typeof window !== 'undefined') {
+          try {
+            const originalFetch = window.fetch;
+            let customFetch = originalFetch;
+            Object.defineProperty(window, 'fetch', {
+              configurable: true,
+              enumerable: true,
+              get() {
+                return customFetch;
+              },
+              set(val) {
+                customFetch = val;
+              }
+            });
+          } catch (e) {
+            console.warn("Unable to patch window.fetch:", e);
+          }
+
+          if (!window.FormData) {
+            window.FormData = function FormData() {};
+          }
+          if (window.FormData && !window.FormData.prototype.keys) {
+            window.FormData.prototype.keys = function() {
+              return {
+                next: function() { return { done: true }; }
+              };
+            };
+          }
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

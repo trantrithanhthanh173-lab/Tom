@@ -1,0 +1,6 @@
+{
+  "name": "Fabric Mod Downloader",
+  "description": "Interactive Minecraft Mod, Resource Pack & Shader manager with automated Release/Beta channels, Python updater script generator, and one-click ZIP packaging.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
